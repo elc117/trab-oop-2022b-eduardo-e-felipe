@@ -2,10 +2,12 @@ package com.example.matriculas.model;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
+import java.util.Map;
 
 
 @Document
@@ -13,11 +15,13 @@ import java.util.List;
 public class Aluno {
 
     @Id
-    private String idAluno;
+    private String id;
     private String nome;
-    private String matricula;
 
-    @DBRef
-    private List<Atividade> atividades;
+    @Indexed(unique = true)
+    private String matricula;
+    private String curso;
+
+    private Map<String, List<Atividade>> avaliacoes;
 
 }
